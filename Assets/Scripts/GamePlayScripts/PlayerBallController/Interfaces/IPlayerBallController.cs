@@ -21,5 +21,9 @@ namespace GamePlayScripts.PlayerBallController
         /// <summary> Изменить радиус шарика, если новый радус попадает в допустим интервал </summary>
         /// <param name="newScale">Новое значение размера шарика</param>
         void ChangeBallSize(float newScale);
+
+        /// <summary> Изменить цвет мячика </summary>
+        /// <param name="newColor">Новое значение цвета шарика</param>
+        void ChangeBallColor(Color newColor);
     }
 }

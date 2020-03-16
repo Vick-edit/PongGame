@@ -18,6 +18,7 @@ namespace Components.GamePlayComponents
         private PlayerBallParameters _ballParameters = new PlayerBallParameters();
 
         public IPlayerBallController PlayerBallController { get; private set; }
+        public PlayerBallParameters PlayerBallParameters => _ballParameters;
 
 
         private void Awake()

@@ -54,5 +54,11 @@ namespace GamePlayScripts.PlayerBallController
 
             _monoBehaviourParameters.Transform.localScale = newScaleVector;
         }
+
+        /// <inheritdoc />
+        public void ChangeBallColor(Color newColor)
+        {
+            _monoBehaviourParameters.BallSprite.color = newColor;
+        }
     }
 }

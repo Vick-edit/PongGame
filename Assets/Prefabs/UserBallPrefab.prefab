@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8704591456638235895}
   - component: {fileID: 1589530548}
   m_Layer: 10
-  m_Name: UserBall
+  m_Name: UserBallPrefab
   m_TagString: PlayerBall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -48,6 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _ballParameters:
     Transform: {fileID: 8704591456638235894}
+    BallSprite: {fileID: 8704591456638235897}
     Rigidbody: {fileID: 1589530548}
     BallRadius: 1
     MinBallRadius: 0.7

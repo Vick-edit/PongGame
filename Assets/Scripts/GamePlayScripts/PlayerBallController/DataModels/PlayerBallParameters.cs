@@ -19,6 +19,9 @@ namespace GamePlayScripts.PlayerBallController.DataModels
         public Transform Transform;
 
         /// <summary> Rigidbody шарика </summary>
+        public SpriteRenderer BallSprite;
+
+        /// <summary> Rigidbody шарика </summary>
         public Rigidbody2D Rigidbody;
 
         /// <summary> Радиус шарика </summary>

@@ -50,6 +50,14 @@ namespace Components.GamePlayComponents
             var ballMovementVector = GetRandomLaunchVector();
             _playerBall.PlayerBallController.StartMovementInDirection(ballMovementVector);
 
+            var randomSpeed = Random.Range(_playerBall.PlayerBallParameters.MinForcePower, _playerBall.PlayerBallParameters.MaxForcePower);
+            var randomSize = Random.Range(_playerBall.PlayerBallParameters.MinBallRadius, _playerBall.PlayerBallParameters.MaxBallRadius);
+            var randomColor = Random.ColorHSV();
+            randomColor.a = 1;
+            _playerBall.PlayerBallController.ChangeSpeed(randomSpeed);
+            _playerBall.PlayerBallController.ChangeBallSize(randomSize);
+            _playerBall.PlayerBallController.ChangeBallColor(randomColor);
+
             _playerMainPad.transform.position = _mainPadStartPosition;
             _playerSecondPad.transform.position = _secondPadStartPosition;
             _dispatcher.Rise(_playerMainPad, new OnPaddleMovedEventParams(_playerMainPad.transform.position.x));
