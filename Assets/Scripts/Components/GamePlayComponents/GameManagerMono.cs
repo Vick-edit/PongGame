@@ -1,6 +1,9 @@
 ﻿using System;
 using Components.Helpers;
 using GameEventParams;
+using GamePlayScripts.UserPrefsController.DataModels;
+using GamePlayScripts.UserPrefsController.Interfaces;
+using Tools;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using Utils.Dispatcher;
@@ -25,12 +28,17 @@ namespace Components.GamePlayComponents
         [SerializeField] private PlayerBallLauncherMono _ballLauncher;
         [SerializeField] private int _onHitScore = 70;
 
+        private IUserPrefsController _userPrefsController;
+        private UserPrefs _userPrefs;
         private int _currentScore;
 
         private void Awake()
         {
             _currentScore = 0;
             _scoreToText.SetScore(_currentScore);
+
+            _userPrefsController = DependencyResolver.GetCachedUserPrefsControllerl();
+            _userPrefs = _userPrefsController.GetUserPrefs();
 
             this.WeakSubscribe<GameManagerMono, GameManagementEvent>(gm => gm.OnGameEvent);
         }
@@ -41,7 +49,13 @@ namespace Components.GamePlayComponents
             _ballLauncher.LaunchBallFromSpawnPosition();
         }
 
-        
+        private void OnDestroy()
+        {
+            UpdateHighScore();
+        }
+
+
+
         #region OnGameEvent
         private void OnGameEvent(object source, GameManagementEvent gameManagementEvent)
         {
@@ -65,6 +79,15 @@ namespace Components.GamePlayComponents
         {
             _deathScreen.gameObject.SetActive(true);
         }
+
+        private void UpdateHighScore()
+        {
+            if(_currentScore < _userPrefs.UserScore)
+                return;
+
+            _userPrefs.UserScore = _currentScore;
+            _userPrefsController.Save(_userPrefs);
+        }
         #endregion
 
 
@@ -77,6 +100,7 @@ namespace Components.GamePlayComponents
 
         public void ResetGame()
         {
+            UpdateHighScore();
             _currentScore = 0;
             _scoreToText.SetScore(_currentScore);
 

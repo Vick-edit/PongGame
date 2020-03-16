@@ -1,4 +1,6 @@
 ﻿using Components.Helpers;
+using GamePlayScripts.UserPrefsController.Interfaces;
+using Tools;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -16,8 +18,12 @@ namespace Components.GamePlayComponents
         [SerializeField] private Transform _highScoreContainer;
         [SerializeField] private ScoreToTextMono _scoreToText;
 
+        private IUserPrefsController _userPrefsController;
+
         private void Awake()
         {
+            _userPrefsController = DependencyResolver.GetCachedUserPrefsControllerl();
+
             currentSceneIndex = gameObject.scene.buildIndex;
             SceneManager.LoadSceneAsync(_soundScene, LoadSceneMode.Additive);
         }
@@ -31,6 +37,7 @@ namespace Components.GamePlayComponents
 
         public void ShowHighScore()
         {
+            _scoreToText.SetScore(_userPrefsController.GetUserPrefs().UserScore);
             _highScoreContainer.gameObject.SetActive(true);
         }
 

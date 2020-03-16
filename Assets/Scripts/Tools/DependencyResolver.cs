@@ -6,6 +6,8 @@ using GamePlayScripts.UserInput;
 using GamePlayScripts.UserInput.Interfaces;
 using GamePlayScripts.UserPaddleController;
 using GamePlayScripts.UserPaddleController.DataModels;
+using GamePlayScripts.UserPrefsController;
+using GamePlayScripts.UserPrefsController.Interfaces;
 using UnityEngine;
 using UnityEngine.UI;
 using Utils.Dispatcher;
@@ -43,6 +45,12 @@ namespace Tools
         public static IEffectPool GetCachedEffectPool()
         {
             return EffectPoolWrapper.Instance;
+        }
+
+        /// <summary> Получить инстанс настроек пользователя </summary>
+        public static IUserPrefsController GetCachedUserPrefsControllerl()
+        {
+            return UserPrefsController.Instance;
         }
 
         /// <summary> Получить контроллер стены игрового поля </summary>
